@@ -49,9 +49,9 @@
             : 'durchschnittlich viel geregnet';
 
     $: tempClass =
-        curDay.TXK - curDay.context.TXK_hi > 0.15
+        curDay.TXK > curDay.context.TXK_hi
             ? 'high'
-            : curDay.context.TXK_lo - curDay.TXK > 0.15
+            : curDay.TXK < curDay.context.TXK_lo
             ? 'low'
             : 'normal';
 
@@ -100,7 +100,7 @@
                 <div>
                     In den letzten 30 Tagen hat es <b class="rain-{precipClass}">{precipSentence}</b
                     >
-                    (<span>{@html fmtRain(curDay.rain30days).replace(' ', '&nbsp;')}/qm</span>).
+                    (<span>{@html fmtRain(curDay.rain30days).replace(' ', '&nbsp;')}</span>).
                 </div>
             </div>
         </div>
