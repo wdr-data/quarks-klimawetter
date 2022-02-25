@@ -38,6 +38,10 @@
         monthlyData = monthlyStats[curMonth].stats.slice(0);
     }
 
+    $: precipLabelPast = curDay.snow30days ? 'geregnet oder geschneit' : 'geregnet';
+    $: precipLabel = curDay.snow30days ? 'regnet oder schneit' : 'regnet';
+    $: precipLabelMonth = monthlyData.some(data => data.has_snow) ? 'geregnet oder geschneit' : 'geregnet';
+
     onMount(async () => {
         // force re-rendering on mount
         await tick();
@@ -113,7 +117,7 @@
 
         <div class="paragraph_headline" style="margin-top: 70px;">
             <h3>
-                🌧️ So {curDay.rain30days < curDay.context.rain30days_lo ? 'wenig' : 'viel'} regnet es
+                🌧️ So {curDay.rain30days < curDay.context.rain30days_lo ? 'wenig' : 'viel'} {precipLabel} es
                 momentan
                 {station.prep} <u>{station.name}</u> im Vergleich zu einer Zeit, die noch wenig vom Klimawandel
                 betroffen war
@@ -134,7 +138,7 @@
         <div class="paragraph_content">
             <p>
                 Über die vergangenen 30 Tage hat es {fmtRain(curDay.rain30days, true)}
-                geregnet. Das ist {curDay.rain30days > curDay.context.rain30days_hi
+                {precipLabelPast}. Das ist {curDay.rain30days > curDay.context.rain30days_hi
                     ? 'besonders viel '
                     : curDay.rain30days < curDay.context.rain30days_lo
                     ? 'besonders wenig '
@@ -159,12 +163,16 @@
         <div class="paragraph_content">
             <p>
                 Ein Punkt auf der Niederschlagslinie steht nicht für die Niederschlagsmenge an
-                diesem Tag, sondern für den gesammelten Niederschlag der letzten 30 Tage. Das hat
-                einen guten Grund: Einzelne Regentage unterliegen sehr starken Schwankungen. Das
-                betrifft sowohl die Regenmenge pro Regentag als auch die Häufigkeit der Regentage in
-                einem Monat oder sogar in einem Jahr. Wir stellen deshalb in unserem Diagramm dar,
-                wie viel Niederschlag kumuliert (das heißt: gehäuft) über die vergangenen 30 Tage
-                gefallen ist. Diesen Wert vergleichen wir mit dem Referenzzeitraum 1961-1990.
+                diesem Tag, sondern für den gesammelten Niederschlag der letzten 30 Tage. Gab es in
+                dieser Zeit mindestens einmal Schnee oder Schneeregen, kennzeichnen wir das durch
+                den Zusatz "oder geschneit".
+
+                Dass wir den Niederschlag über 30 Tage betrachten, hat einen guten Grund: Einzelne
+                Regentage unterliegen sehr starken Schwankungen. Das betrifft sowohl die Regenmenge
+                pro Regentag als auch die Häufigkeit der Regentage in einem Monat oder sogar in
+                einem Jahr. Wir stellen deshalb in unserem Diagramm dar, wie viel Niederschlag
+                kumuliert (das heißt: gehäuft) über die vergangenen 30 Tage gefallen ist. Den
+                kumulierten Niederschlags-Wert vergleichen wir mit dem Referenzzeitraum 1961-1990.
             </p>
         </div>
 
@@ -257,7 +265,7 @@
         <Section>
             <h3>
                 🌧️ So viel hat es im <u>{curMonthName}</u>
-                {station.prep} <u>{station.name}</u> die letzten {numYears} Jahre geregnet
+                {station.prep} <u>{station.name}</u> die letzten {numYears} Jahre {precipLabelMonth}
             </h3>
 
             <figure>
