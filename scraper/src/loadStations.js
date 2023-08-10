@@ -8,6 +8,12 @@ const STATION_BLACKLIST = [
     'Düsseldorf',
     'Hornisgrinde',
     'Bochum',
+    'Greifswalder Oie',
+    'Harzburg, Bad',
+    'Bertsdorf-Hörnitz',
+    'Köthen (Anhalt)',
+    'Lenzkirch-Ruhbühl',
+    'Sondershausen',
 ];
 
 module.exports = async function loadStations (baseMinYear) {
