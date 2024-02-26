@@ -23,7 +23,7 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set environment variables for staging
         if: endsWith(github.ref, '/main')
@@ -71,7 +71,7 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set environment variables for staging
         if: endsWith(github.ref, '/main')
