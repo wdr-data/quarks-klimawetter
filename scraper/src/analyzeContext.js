@@ -14,8 +14,9 @@ const { ascendingKey } = require('d3-jetpack');
 const { round, quantileConfig } = require('./shared.js');
 
 const DAYS = [];
-let day = dayjs('2021-01-01');
-while (day.year() === 2021) {
+// SCHALTJAHR?!
+let day = dayjs('2024-01-01');
+while (day.year() === 2024) {
     DAYS.push(day.format('MM-DD'));
     day = day.add(1, 'day');
 }
