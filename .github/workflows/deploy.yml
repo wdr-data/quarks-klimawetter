@@ -20,10 +20,10 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set environment variables for staging
         if: endsWith(github.ref, '/main')
@@ -40,10 +40,10 @@ jobs:
           echo "TEAMS_WEBHOOK=${{ secrets.TEAMS_WEBHOOK_PROD }}" >> $GITHUB_ENV
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: scraper/package-lock.json
 
       - name: Install dependencies
@@ -68,10 +68,10 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set environment variables for staging
         if: endsWith(github.ref, '/main')
@@ -93,10 +93,10 @@ jobs:
           verbose: false
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: app/package-lock.json
 
       - name: Install dependencies
