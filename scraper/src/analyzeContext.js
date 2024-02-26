@@ -14,13 +14,14 @@ const { ascendingKey } = require('d3-jetpack');
 const { round, quantileConfig } = require('./shared.js');
 
 const DAYS = [];
-let day = dayjs('2021-01-01');
-while (day.year() === 2021) {
+// SCHALTJAHR?!
+let day = dayjs('2024-01-01');
+while (day.year() === 2024) {
     DAYS.push(day.format('MM-DD'));
     day = day.add(1, 'day');
 }
 
-module.exports = function analyzeContext (data, baseMinYear) {
+module.exports = function analyzeContext(data, baseMinYear) {
     // add some useful date keys
     data.forEach(row => {
         const date = dayjs(row.date);
@@ -40,7 +41,7 @@ module.exports = function analyzeContext (data, baseMinYear) {
     return { daily, monthly };
 };
 
-function getDailyContext (data, day, baseMinYear) {
+function getDailyContext(data, day, baseMinYear) {
     const datesTemp = data.filter(
         d =>
             d.year >= baseMinYear &&
@@ -102,7 +103,7 @@ function getDailyContext (data, day, baseMinYear) {
  * @param {number} baseMinYear begin of 30-year context period
  * @returns {object}
  */
-function getMonthlyContext (data, month, baseMinYear) {
+function getMonthlyContext(data, month, baseMinYear) {
     const stats = [];
     group(
         data.filter(d => d.month === month),

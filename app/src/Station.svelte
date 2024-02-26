@@ -143,8 +143,8 @@
                 {precipLabelPast}. Das ist {curDay.rain30days > curDay.context.rain30days_hi
                     ? 'besonders viel '
                     : curDay.rain30days < curDay.context.rain30days_lo
-                    ? 'besonders wenig '
-                    : 'normal'}{#if curDay.rain30days < curDay.context.rain30days_lo || curDay.rain30days > curDay.context.rain30days_hi}
+                      ? 'besonders wenig '
+                      : 'normal'}{#if curDay.rain30days < curDay.context.rain30days_lo || curDay.rain30days > curDay.context.rain30days_hi}
                     und etwa {fmtRain(
                         Math.round(
                             Math.abs(

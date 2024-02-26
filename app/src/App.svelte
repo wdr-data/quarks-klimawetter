@@ -74,8 +74,8 @@
                 d3range(5).map(d => ({
                     date: dayjs(lastDate)
                         .add(d + 1, 'day')
-                        .toDate()
-                }))
+                        .toDate(),
+                })),
             )
             .map(d => {
                 const day = dayjs(d.date).format('MM-DD');
