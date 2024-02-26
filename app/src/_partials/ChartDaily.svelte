@@ -22,7 +22,7 @@
         top: 50,
         right: $isMobile ? 80 : 80,
         bottom: 60,
-        left: $isMobile ? 30 : 40
+        left: $isMobile ? 30 : 40,
     };
 
     $: xRange = [padding.left, $chartWidth - padding.right];
@@ -40,7 +40,7 @@
         ...dataFiltered.map(d => d.context[show]),
         ...dataFiltered.map(d => d.context[show + '_lo']),
         ...dataFiltered.map(d => d.context[show + '_hi']),
-        ...(includeZero ? [0] : [])
+        ...(includeZero ? [0] : []),
     ].filter(d => d !== undefined);
 
     $: yExtent = extent(yValues).map((d, i) => (show === 'temp' ? d + [-2, 0][i] : d));
@@ -50,7 +50,7 @@
 
     const midMonth = d => {
         return new Date(
-            d.getTime() + (new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()) - d) / 2
+            d.getTime() + (new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()) - d) / 2,
         );
     };
 
@@ -58,7 +58,7 @@
     $: format1 = (d, i) => dayjs(d).format('D.M.');
     $: format2 = (d, i) => {
         const fmt = [i > 0 && d.getFullYear() != xTicks[i - 1].getFullYear() ? 'YYYY' : ''].join(
-            ''
+            '',
         );
         return fmt ? dayjs(d).format(fmt) : '';
     };
@@ -70,10 +70,10 @@
     export let hasRecordTemp;
     $: {
         hasRecordTemp = !!dataFiltered.find(
-            d => ((
-                d.TXK > d.context.TXK_records.hi[2].TXK ||
-                d.context.TXK_records.hi[2].year == dayjs(d.date).year()
-            ) && dayjs(d.date) < dayjs())
+            d =>
+                (d.TXK > d.context.TXK_records.hi[2].TXK ||
+                    d.context.TXK_records.hi[2].year == dayjs(d.date).year()) &&
+                dayjs(d.date) < dayjs(),
         );
     }
 
