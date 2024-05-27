@@ -22,10 +22,10 @@ module.exports = async function loadStations (baseMinYear) {
     const raw = (await got(url, { encoding: 'latin1' })).body;
     const stations = parseFixedWidth(raw, {
         // The format was changed sometime between 2024-04-15 and 2024-05-01
-        //skip: 3,
-        //widths: [5, 9, 9, 15, 12, 10, 42, 22],
+        // ...and changed back again.
+        //widths: [21, 9, 9, 14, 12, 10, 81, 843],
         skip: 2,
-        widths: [21, 9, 9, 14, 12, 10, 81, 843],
+        widths: [5, 9, 9, 15, 12, 10, 42, 22],
         names: ['id', 'from', 'to', 'altitude', 'lat', 'lon', 'name', 'state'],
     })
         .map(station => ({
